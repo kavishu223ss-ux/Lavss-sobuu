@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine Surprise 💖</title>
+<style>
+body{
+  font-family: Arial, sans-serif;
+  background: linear-gradient(#ff9a9e,#fad0c4);
+  text-align:center;
+  padding:40px;
+  overflow:hidden;
+}
+.box{
+  background:white;
+  border-radius:20px;
+  padding:30px;
+  max-width:400px;
+  margin:auto;
+  position:relative;
+  z-index:2;
+}
+button{
+  padding:10px 20px;
+  margin:10px;
+  border:none;
+  border-radius:20px;
+  font-size:16px;
+  cursor:pointer;
+}
+.yes{background:#ff4d6d;color:white;}
+.no{background:#555;color:white;position:absolute;}
+/* Floating hearts */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  color:#ff3366;
+  font-size:20px;
+  animation:float 6s linear infinite;
+  opacity:0.8;
+}
+@keyframes float{
+  from{transform:translateY(0);opacity:1;}
+  to{transform:translateY(-110vh);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background music -->
+<audio id="bgm" loop>
+  <source src="inji.mp3" type="audio/mpeg">
+</audio>
+
+<div class="box" id="content">
+  <h2>Girls🥺 did you love me?</h2>
+  <button class="yes" onclick="loveYes()">Yes</button>
+  <button class="no" id="noBtn" onmouseover="moveNo()">No</button>
+</div>
+
+<script>
+/* Music play on first click for mobile */
+document.addEventListener("click", () => {
+  document.getElementById("bgm").play();
+},{ once:true });
+
+/* No button escape effect */
+function moveNo(){
+  const btn = document.getElementById("noBtn");
+  const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+  const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
+}
+
+/* Question flow */
+function loveYes(){
+  document.getElementById("content").innerHTML = `
+    <h2>I love you too ❤️</h2>
+    <p>Will you be my Valentine? 💝</p>
+    <button class="yes" onclick="valYes()">Yes</button>
+    <button class="no" id="noBtn" onmouseover="moveNo()">No</button>
+  `;
+}
+
+function loveNo(){
+  document.getElementById("content").innerHTML = `
+    <h2>So sad 😔</h2>
+    <p>Will you be my Valentine? 💔</p>
+    <button class="yes" onclick="valYes()">Yes</button>
+    <button class="no" id="noBtn" onmouseover="moveNo()">No</button>
+  `;
+}
+
+function valYes(){
+  document.getElementById("content").innerHTML = `
+    <h2>Ummaaaaa 😘💋</h2>
+    <h3>Happy Valentine's Day sobu_Lavs 💖</h3>
+    <p>— Wishes by Ishu 🌸</p>
+  `;
+}
+
+function valNo(){
+  document.getElementById("content").innerHTML = `
+    <h2>I hate you toooo 😤</h2>
+    <h3>Happy Valentine's Day mama 💔</h3>
+    <p>— Wishes by Ishu 🌸</p>
+  `;
+}
+
+/* Floating hearts animation */
+setInterval(()=>{
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.fontSize = (15 + Math.random()*20) + "px";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),6000);
+},500);
+</script>
+
+</body>
+</html>
